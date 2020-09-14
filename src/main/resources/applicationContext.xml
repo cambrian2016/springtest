@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<import resource="applicationContextUser.xml"/>
+
+<!--    <bean id="userDao" class="net.htwater.springtest.dao.impl.UserDaoImpl"/>-->
+    <!--    <bean id="userDao" class="net.htwater.springtest.factory.StaticFactory" factory-method="getUserDao"/>-->
+    <!--    <bean id="factory" class="net.htwater.springtest.factory.DynamicFactory"/>-->
+    <!--    <bean id="userDao" factory-bean="factory" factory-method="getUserDao"/>-->
+
+<!--    <bean id="userDao" class="net.htwater.springtest.dao.impl.UserDaoImpl"/>-->
+<!--    <bean id="userService" class="net.htwater.springtest.service.impl.UserServiceImpl" >-->
+<!--        <property name="userDao" ref="userDao"/>-->
+<!--    </bean>-->
+
+    <bean id="user1" class="net.htwater.springtest.domain.User">
+        <property name="name" value="tom"/>
+        <property name="address" value="beijing"/>
+    </bean>
+    <bean id="user2" class="net.htwater.springtest.domain.User">
+        <property name="name" value="lucy"/>
+        <property name="address" value="tianjin"/>
+    </bean>
+
+    <bean id="userDao" class="net.htwater.springtest.dao.impl.UserDaoImpl">
+        <property name="userName" value="张三"/>
+        <property name="age" value="18"/>
+        <property name="strList">
+            <list>
+                <value>a</value>
+                <value>bb</value>
+                <value>ccc</value>
+            </list>
+        </property>
+        <property name="userMap">
+            <map>
+                <entry key="u1" value-ref="user1"/>
+                <entry key="u2" value-ref="user2"/>
+            </map>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="p1">ppp1</prop>
+                <prop key="p2">ppp2</prop>
+                <prop key="p3">ppp3</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="userService" class="net.htwater.springtest.service.impl.UserServiceImpl" >
+        <constructor-arg name="userDao" ref="userDao"/>
+    </bean>
+
+</beans>
